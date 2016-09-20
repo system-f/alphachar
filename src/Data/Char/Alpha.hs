@@ -39,6 +39,7 @@ import Text.Parser.Combinators((<?>), try)
 -- $setup
 --
 -- >>> import Text.Parsec(parse)
+-- >>> import Control.Lens((#), isn't, _Right)
 
 -- | An upper-case character between @'A'@ and @'Z'@.
 newtype AlphaUpper =
