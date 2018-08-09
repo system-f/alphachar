@@ -1,3 +1,7 @@
+0.0.3
+
+* Rename some functions.
+
 0.0.2
 
 * Rewrite to use `Generic`.

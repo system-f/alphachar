@@ -3006,11 +3006,11 @@ lookup1 ::
 lookup1 a ((_, q) :| t) =
   fromMaybe q (lookup a t)
 
-lowerupper ::
+lower_upper ::
   Iso'
     Lower
     Upper
-lowerupper =
+lower_upper =
   let r =
         (Lower_a, Upper_A) :|
         [
@@ -3044,18 +3044,18 @@ lowerupper =
         (`lookup1` r)
         (`lookup1` ((\(m, n) -> (n, m)) <$> r))
 
-upperlower ::
+upper_lower ::
   Iso'
     Upper
     Lower
-upperlower =
-  from lowerupper
+upper_lower =
+  from lower_upper
 
-rotate1Lower ::
+rotate1_lower ::
   Iso'
     Lower
     Lower
-rotate1Lower =
+rotate1_lower =
   let r =
         (Lower_a, Lower_b) :|
         [
@@ -3089,11 +3089,11 @@ rotate1Lower =
         (`lookup1` r)
         (`lookup1` ((\(m, n) -> (n, m)) <$> r))
 
-rotate1Upper ::
+rotate1_upper ::
   Iso'
     Upper
     Upper
-rotate1Upper =
+rotate1_upper =
   let r =
         (Upper_A, Upper_B) :|
         [
@@ -3127,32 +3127,32 @@ rotate1Upper =
         (`lookup1` r)
         (`lookup1` ((\(m, n) -> (n, m)) <$> r))
 
-rotate1Alpha ::
+rotate1_alpha ::
   Iso'
     Alpha
     Alpha
-rotate1Alpha =
+rotate1_alpha =
   iso
     (\a ->  case a of
               AlphaLower l ->
                 AlphaLower
-                  (l ^. rotate1Lower)
+                  (l ^. rotate1_lower)
               AlphaUpper u ->
                 AlphaUpper
-                  (u ^. rotate1Upper))
+                  (u ^. rotate1_upper))
     (\a ->  case a of
               AlphaLower l ->
                 AlphaLower
-                  (rotate1Lower # l)
+                  (rotate1_lower # l)
               AlphaUpper u ->
                 AlphaUpper
-                  (rotate1Upper # u))
+                  (rotate1_upper # u))
 
-mirrorLower ::
+mirror_lower ::
   Iso'
     Lower
     Lower
-mirrorLower =
+mirror_lower =
   let r =
         (Lower_a, Lower_z) :|
         [
@@ -3185,11 +3185,11 @@ mirrorLower =
   in  involuted
         (`lookup1` r)
 
-mirrorUpper ::
+mirror_upper ::
   Iso'
     Upper
     Upper
-mirrorUpper =
+mirror_upper =
   let r =
         (Upper_A, Upper_Z) :|
         [
@@ -3222,23 +3222,23 @@ mirrorUpper =
   in  involuted
         (`lookup1` r)
 
-mirrorAlpha ::
+mirror_alpha ::
   Iso'
     Alpha
     Alpha
-mirrorAlpha =
+mirror_alpha =
   iso
     (\a ->  case a of
               AlphaLower l ->
                 AlphaLower
-                  (l ^. mirrorLower)
+                  (l ^. mirror_lower)
               AlphaUpper u ->
                 AlphaUpper
-                  (u ^. mirrorUpper))
+                  (u ^. mirror_upper))
     (\a ->  case a of
               AlphaLower l ->
                 AlphaLower
-                  (mirrorLower # l)
+                  (mirror_lower # l)
               AlphaUpper u ->
                 AlphaUpper
-                  (mirrorUpper # u))
+                  (mirror_upper # u))
