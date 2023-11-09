@@ -1,3 +1,7 @@
+0.0.4
+
+* Widen version bounds.
+
 0.0.3
 
 * Rename some functions.
